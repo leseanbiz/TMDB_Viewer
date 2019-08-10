@@ -42,18 +42,14 @@ const useStyles = makeStyles(theme => ({
 export default function MovieCard({img, title, votes, popularity, releaseDate, overview}) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-  console.log("img url:", `https://image.tmdb.org/t/p/w500 ${img}`)
-  function handleExpandClick() {
-    setExpanded(!expanded);
-  }
-  //set Default image
+  const handleExpandClick = () => setExpanded(!expanded)
+
   return (
     <Card className={classes.card}>
       <CardHeader
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>
             {title[0]}
-            {/* what to do here?, pull the first letter of the search? */}
           </Avatar>
         }
         action={
@@ -61,12 +57,12 @@ export default function MovieCard({img, title, votes, popularity, releaseDate, o
             <MoreVertIcon />
           </IconButton>
         }
-        title={title}
-        subheader={releaseDate}
+        title={title ? title : "no title provided"}
+        subheader={`Release date: ${releaseDate}`}
       />
       <CardMedia
         className={classes.media}
-        image={`https://image.tmdb.org/t/p/w500${img}`}
+        image={img ? `https://image.tmdb.org/t/p/w500${img}` : "https://via.placeholder.com/150/0000FF/808080?Text=Digital.com"}
         title={title}
       />
       <CardActions disableSpacing>
@@ -90,10 +86,6 @@ export default function MovieCard({img, title, votes, popularity, releaseDate, o
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>Overview:</Typography>
-          <Typography paragraph>
-            TEST
-            {/* display rating and votes here? */}
-          </Typography>
           <Typography paragraph>
             {overview}
           </Typography>

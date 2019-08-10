@@ -3,19 +3,32 @@ import NavBar from './NavBar';
 import SearchField from './SearchField';
 import MovieCard from './MovieCard';
 import Button from './Button';
+import { connect } from 'react-redux';
+import { addMovies } from '../actions/movies';
 
 const MOVIE_DB_BASE_URL = "https://api.themoviedb.org/3/search/movie?page=1&include_adult=false&language=en-US&api_key="
 const API_KEY = "057dfa32a18eed0f2dc23dc2e80ed8a0";
 
-function App() {
-  const [data, setData] = useState('');
+const mapStateToProps = state => {
+  return {movies: state.moviesReducer}
+  };
+
+const mapDispatchToProps = dispatch => {
+  return {
+    doAddMovies: search => dispatch(addMovies(search)),
+  }
+}
+
+function App({movies, doAddMovies}) {
+  // console.log("APP:", movies);
+  // const [data, setData] = useState('');
   const [search, setSearch] = useState('')//hateful to find empty image
   const fetchData = async (search) => {
       console.log("fetch called", search);
       if(!search){ return alert("please enter a search value and try again")}
       const res = await fetch(MOVIE_DB_BASE_URL + API_KEY + "&query="+ search);
       const apiData = await res.json();
-      setData(apiData);
+      doAddMovies(apiData.results)
     }
   // console.log(MOVIE_DB_BASE_URL + API_KEY + "hateful")
   console.log("Search:", search);
@@ -31,7 +44,7 @@ function App() {
         search={search}
        />
       {
-        data ? data.results.map(movie => {
+        movies ? movies.map(movie => {
             return (
               <MovieCard
                 key={movie.id}
@@ -44,10 +57,10 @@ function App() {
               />
             )
           }
-        ) : null
+        ) : <h1>Please enter a search value</h1>
       }
     </div>
   );
 }
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);

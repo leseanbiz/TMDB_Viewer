@@ -62,7 +62,7 @@ export default function MovieCard({img, title, votes, popularity, releaseDate, o
       />
       <CardMedia
         className={classes.media}
-        image={img ? `https://image.tmdb.org/t/p/w500${img}` : "https://via.placeholder.com/150/0000FF/808080?Text=Digital.com"}
+        image={img ? `https://image.tmdb.org/t/p/w500${img}` : "https://via.placeholder.com/150/FFFFFF/000000?Text=noImageProvided"}
         title={title}
       />
       <CardActions disableSpacing>

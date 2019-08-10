@@ -20,9 +20,9 @@ const theme = createMuiTheme({
   },
 });
 
-export default function SearchField({search, setSearch}) {
+export default function SearchField({query, setQuery}) {
   const classes = useStyles();
-  console.log(search);
+  console.log(query);
   return (
     <div className={classes.root}>
       <ThemeProvider theme={theme}>
@@ -31,8 +31,8 @@ export default function SearchField({search, setSearch}) {
           label="Search Movies!"
           variant="outlined"
           id="mui-theme-provider-outlined-input"
-          onChange={event => setSearch(event.target.value)}
-          value={search}
+          onChange={event => setQuery(event.target.value)}
+          value={query}
         />
       </ThemeProvider>
     </div>

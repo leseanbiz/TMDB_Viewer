@@ -4,10 +4,9 @@ import SearchField from './SearchField';
 import MovieCard from './MovieCard';
 import Button from './Button';
 import { connect } from 'react-redux';
-import { addMovies } from '../actions/movies';
+import { fetchMovies } from '../actions/movies';
 
-const MOVIE_DB_BASE_URL = "https://api.themoviedb.org/3/search/movie?page=1&include_adult=false&language=en-US&api_key="
-const API_KEY = "057dfa32a18eed0f2dc23dc2e80ed8a0";
+
 
 const mapStateToProps = state => {
   return {movies: state.moviesReducer}
@@ -15,33 +14,33 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    doAddMovies: search => dispatch(addMovies(search)),
+    doFetchMovies: query => dispatch(fetchMovies(query)),
   }
 }
 
-function App({movies, doAddMovies}) {
+function App({movies, doFetchMovies}) {
   // console.log("APP:", movies);
   // const [data, setData] = useState('');
-  const [search, setSearch] = useState('')//hateful to find empty image
-  const fetchData = async (search) => {
-      console.log("fetch called", search);
-      if(!search){ return alert("please enter a search value and try again")}
-      const res = await fetch(MOVIE_DB_BASE_URL + API_KEY + "&query="+ search);
-      const apiData = await res.json();
-      doAddMovies(apiData.results)
-    }
+  const [query, setQuery] = useState('')//hateful to find empty image
+  // const fetchData = async (search) => {
+  //     console.log("fetch called", search);
+  //     if(!search){ return alert("please enter a search value and try again")}
+  //     const res = await fetch(MOVIE_DB_BASE_URL + API_KEY + "&query="+ search);
+  //     const apiData = await res.json();
+  //     doAddMovies(apiData.results)
+  //   }
   // console.log(MOVIE_DB_BASE_URL + API_KEY + "hateful")
-  console.log("Search:", search);
+  console.log("Query:", query);
   return (
     <div className="">
       <NavBar />
       <SearchField
-        setSearch={setSearch}
-        search={search}
+        setQuery={setQuery}
+        query={query}
       />
       <Button
-        fetchData={() => fetchData(search)}
-        search={search}
+        doFetchMovies={() => doFetchMovies(query)}
+        query={query}// is this needed?
        />
       {
         movies ? movies.map(movie => {

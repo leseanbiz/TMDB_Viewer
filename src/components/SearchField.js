@@ -27,6 +27,7 @@ export default function SearchField({query, setQuery}) {
     <div className={classes.root}>
       <ThemeProvider theme={theme}>
         <TextField
+          autoFocus
           className={classes.margin}
           label="Search Movies!"
           variant="outlined"

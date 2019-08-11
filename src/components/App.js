@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import NavBar from './NavBar';
 import SearchField from './SearchField';
 import MovieCard from './MovieCard';
@@ -6,6 +6,7 @@ import Button from './Button';
 import { connect } from 'react-redux';
 import { fetchMovies, nextPage, previousPage } from '../actions/movies';
 import Stepper from './Stepper';
+
 
 const mapStateToProps = state => {
   return {
@@ -19,24 +20,21 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     doFetchMovies: query => dispatch(fetchMovies(query)),
-    doNextPage: (num) => dispatch(nextPage(num)),
-    doPreviousPage: (num) => dispatch(previousPage(num)),
+    doNextPage: (num, query) => dispatch(nextPage(num, query)),
+    doPreviousPage: (num, query) => dispatch(previousPage(num, query)),
   }
 }
 
 function App({movies, doFetchMovies, currentPage, totalPages, totalResults, doNextPage, doPreviousPage}) {
   
-  const [query, setQuery] = useState('')//hateful to find empty image
-  const [activeStep, setActiveStep] = React.useState(1);
+  const [query, setQuery] = useState('')
 
   function handleNext() {
-    setActiveStep(prevActiveStep => prevActiveStep + 1);
-    doNextPage(currentPage + 1);
+    doNextPage(currentPage + 1, query);
   }
 
   function handleBack() {
-    setActiveStep(prevActiveStep => prevActiveStep - 1);
-    doPreviousPage(currentPage - 1);
+    doPreviousPage(currentPage - 1, query);
   }
   
   return (
@@ -45,6 +43,10 @@ function App({movies, doFetchMovies, currentPage, totalPages, totalResults, doNe
       <SearchField
         setQuery={setQuery}
         query={query}
+      />
+      <Button
+        doFetchMovies={() => doFetchMovies(query)}
+        query={query}// is this needed?
       />
       {totalPages > 1 ?
         <Stepper
@@ -57,22 +59,21 @@ function App({movies, doFetchMovies, currentPage, totalPages, totalResults, doNe
         />
         : null
       }
-      <Button
-        doFetchMovies={() => doFetchMovies(query)}
-        query={query}// is this needed?
-       />
+
       {
         movies ? movies.map(movie => {
             return (
-              <MovieCard
-                key={movie.id}
-                img={movie.backdrop_path}
-                title={movie.title}
-                votes={movie.vote_count}
-                popularity={movie.votes_average}
-                releaseDate={movie.release_date}
-                overview={movie.overview}
-              />
+
+                <MovieCard
+                  key={movie.id}
+                  img={movie.backdrop_path}
+                  title={movie.title}
+                  votes={movie.vote_count}
+                  popularity={movie.votes_average}
+                  releaseDate={movie.release_date}
+                  overview={movie.overview}
+                />
+
             )
           }
         ) : <h1>Please enter a search value</h1>

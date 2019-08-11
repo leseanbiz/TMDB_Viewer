@@ -28,8 +28,8 @@ export function* paginationSagaWatcher() {
 }
 
 function* paginationSagaWorker(action) {
- console.log("paginationSagaWorker entered", action.num)
- const json = yield fetch(`${MOVIE_DB_BASE_URL + action.num + MOVIE_DB_QUERY_PARAMS + API_KEY}&query=star`)
+ console.log("paginationSagaWorker entered", action.num, action.query)
+ const json = yield fetch(`${MOVIE_DB_BASE_URL + action.num + MOVIE_DB_QUERY_PARAMS + API_KEY}&query=${action.query}`)
                           .then(response => response.json())
                           console.log(json);
  yield put({ type: ADD_MOVIES, payload: json});

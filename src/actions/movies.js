@@ -10,12 +10,12 @@ export function addMovies(movies) {
  return { type: ADD_MOVIES, payload: movies}
 }
 
-export function nextPage(num) {
+export function nextPage(num, query) {
  console.log("nextPage Action", "num:", num);
- return { type: NEXT_PAGE, num: num}
+ return { type: NEXT_PAGE, num: num, query: query}
 }
 
-export function previousPage(num) {
-  console.log("previousPage Action", "num:", num);
-  return { type: PREVIOUS_PAGE, num: num}
+export function previousPage(num, query) {
+  console.log("previousPage Action", "num:", num, "query", query);
+  return { type: PREVIOUS_PAGE, num: num, query: query}
 }

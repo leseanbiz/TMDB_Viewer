@@ -12,7 +12,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Stepper({query, currentPage, totalPages, totalResults, nextPage, previousPage}) {
+export default function Stepper({ currentPage, totalPages, totalResults, nextPage, previousPage}) {
   const classes = useStyles();
   const theme = useTheme();
 
@@ -21,18 +21,18 @@ export default function Stepper({query, currentPage, totalPages, totalResults, n
       variant="progress"
       steps={totalPages}
       position="static"
-      activeStep={currentPage}
+      activeStep={currentPage - 1}
       className={classes.root}
       nextButton={
-        <Button size="small" onClick={(currentPage, query) => nextPage(currentPage, query)} disabled={currentPage === totalPages}>
-          Next
+        <Button size="small" onClick={() => nextPage()} disabled={currentPage === totalPages}>
+          Page {currentPage + 1}
           {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
         </Button>
       }
       backButton={
-        <Button size="small" onClick={(currentPage, query) => previousPage(currentPage, query)} disabled={currentPage === 1}> 
+        <Button size="small" onClick={() => previousPage()} disabled={currentPage === 1}> 
           {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
-          Back
+          {currentPage === 1 ? ' ' : "Page " + (currentPage - 1)}
         </Button>
       }
     />

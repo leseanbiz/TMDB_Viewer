@@ -1,6 +1,6 @@
-import { FETCH_MOVIES, ADD_MOVIES } from '../constants/actionTypes';
+import { ADD_MOVIES } from '../constants/actionTypes';
 
-const INIT_STATE = []
+const INIT_MOVIES_STATE = []
 
 const addMoviesReducerFunc = (state, action) => (
   Object.assign({}, state, 
@@ -13,12 +13,12 @@ const addMoviesReducerFunc = (state, action) => (
   )
 )
 
-export function moviesReducer(state = INIT_STATE, action) {
+export function moviesReducer(state = INIT_MOVIES_STATE, action) {
   console.log("moviesReducer", "state: ", state, "action:", action);
  switch (action.type) {
   case ADD_MOVIES:
-   console.log("ADD_MOVIES", "state: ", state, "action:", action.payload);
-   return addMoviesReducerFunc(state, action);
+    console.log("ADD_MOVIES reducer", "state: ", state, "action:", action.payload);
+    return addMoviesReducerFunc(state, action);
   default:
    return state;
   }

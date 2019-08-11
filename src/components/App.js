@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import NavBar from './NavBar';
 import SearchField from './SearchField';
 import MovieCard from './MovieCard';
@@ -14,7 +14,7 @@ const mapStateToProps = state => {
     currentPage: state.moviesReducer.page,
     totalPages: state.moviesReducer.total_pages,
     totalResults: state.moviesReducer.total_results,
-  }
+    }
   };
 
 const mapDispatchToProps = dispatch => {
@@ -63,9 +63,9 @@ function App({movies, doFetchMovies, currentPage, totalPages, totalResults, doNe
       {
         movies ? movies.map(movie => {
             return (
-
                 <MovieCard
                   key={movie.id}
+                  id={movie.id}
                   img={movie.backdrop_path}
                   title={movie.title}
                   votes={movie.vote_count}
@@ -73,7 +73,6 @@ function App({movies, doFetchMovies, currentPage, totalPages, totalResults, doNe
                   releaseDate={movie.release_date}
                   overview={movie.overview}
                 />
-
             )
           }
         ) : <h1>Please enter a search value</h1>

@@ -4,17 +4,16 @@ import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import MovieCardDetails from './MovieCardDetails';
 
 
 const useStyles = makeStyles(theme => ({
@@ -40,7 +39,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function MovieCard({img, title, votes, popularity, releaseDate, overview}) {
+export default function MovieCard({id, img, title, votes, popularity, releaseDate, overview}) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const handleExpandClick = () => setExpanded(!expanded)
@@ -85,12 +84,10 @@ export default function MovieCard({img, title, votes, popularity, releaseDate, o
         </IconButton>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>Overview:</Typography>
-          <Typography paragraph>
-            {overview}
-          </Typography>
-        </CardContent>
+        <MovieCardDetails
+          overview={overview}
+          id={id}
+        />
       </Collapse>
     </Card>
   );

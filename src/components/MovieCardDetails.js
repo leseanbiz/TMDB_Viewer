@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import Typography from '@material-ui/core/Typography';
 import CardContent from '@material-ui/core/CardContent';
 import { connect } from 'react-redux';
-import { fetchDetails } from '../actions/movies';
+import { fetchDetails } from '../actions/details';
 
 const mapDispatchToProps = dispatch => {
  return {
@@ -19,7 +19,6 @@ const mapStateToProps = state => {
 const MovieCardDetails = ({overview, id, doFetchDetails, details}) => {
 
  useEffect(() => {
-  // console.log("movieCardDetails useEffect details:", details)
   if(id !== details.id){
    doFetchDetails(id);
   }

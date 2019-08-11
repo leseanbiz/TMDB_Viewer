@@ -14,10 +14,8 @@ const addMoviesReducerFunc = (state, action) => (
 )
 
 export function moviesReducer(state = INIT_MOVIES_STATE, action) {
-  console.log("moviesReducer", "state: ", state, "action:", action);
  switch (action.type) {
   case ADD_MOVIES:
-    console.log("ADD_MOVIES reducer", "state: ", state, "action:", action.payload);
     return addMoviesReducerFunc(state, action);
   default:
    return state;

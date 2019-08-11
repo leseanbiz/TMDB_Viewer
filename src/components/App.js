@@ -4,7 +4,8 @@ import SearchField from './SearchField';
 import MovieCard from './MovieCard';
 import Button from './Button';
 import { connect } from 'react-redux';
-import { fetchMovies, nextPage, previousPage } from '../actions/movies';
+import { fetchMovies } from '../actions/movies';
+import { nextPage, previousPage } from '../actions/pagination';
 import Stepper from './Stepper';
 
 

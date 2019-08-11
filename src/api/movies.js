@@ -1,3 +1,10 @@
-// apiKey = "057dfa32a18eed0f2dc23dc2e80ed8a0";
-// url = "https://api.themoviedb.org/3/search/movie?page=1&include_adult=false&language=en-US&api_key=" + apiKey + "&query=" + sear
-// chString;
+import { put } from 'redux-saga/effects';
+import { ADD_MOVIES } from '../constants/actionTypes';
+import { PAGE_NUM, MOVIE_DB_BASE_URL, MOVIE_DB_QUERY_PARAMS, API_KEY } from '../constants/api';
+
+export function* fetchMoviesSagaWorker(action) {
+ if(!action.query) { return alert("please enter a search value") }
+ const json = yield fetch(`${MOVIE_DB_BASE_URL + PAGE_NUM + MOVIE_DB_QUERY_PARAMS + API_KEY}&query=${action.query}`)
+                          .then(response => response.json())
+ yield put({ type: ADD_MOVIES, payload: json});
+}

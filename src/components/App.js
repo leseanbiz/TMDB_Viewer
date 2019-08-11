@@ -4,33 +4,41 @@ import SearchField from './SearchField';
 import MovieCard from './MovieCard';
 import Button from './Button';
 import { connect } from 'react-redux';
-import { fetchMovies } from '../actions/movies';
-
-
+import { fetchMovies, nextPage, previousPage } from '../actions/movies';
+import Stepper from './Stepper';
 
 const mapStateToProps = state => {
-  return {movies: state.moviesReducer}
+  return {
+    movies: state.moviesReducer.results,
+    currentPage: state.moviesReducer.page,
+    totalPages: state.moviesReducer.total_pages,
+    totalResults: state.moviesReducer.total_results,
+  }
   };
 
 const mapDispatchToProps = dispatch => {
   return {
     doFetchMovies: query => dispatch(fetchMovies(query)),
+    doNextPage: (num) => dispatch(nextPage(num)),
+    doPreviousPage: (num) => dispatch(previousPage(num)),
   }
 }
 
-function App({movies, doFetchMovies}) {
-  // console.log("APP:", movies);
-  // const [data, setData] = useState('');
+function App({movies, doFetchMovies, currentPage, totalPages, totalResults, doNextPage, doPreviousPage}) {
+  
   const [query, setQuery] = useState('')//hateful to find empty image
-  // const fetchData = async (search) => {
-  //     console.log("fetch called", search);
-  //     if(!search){ return alert("please enter a search value and try again")}
-  //     const res = await fetch(MOVIE_DB_BASE_URL + API_KEY + "&query="+ search);
-  //     const apiData = await res.json();
-  //     doAddMovies(apiData.results)
-  //   }
-  // console.log(MOVIE_DB_BASE_URL + API_KEY + "hateful")
-  console.log("Query:", query);
+  const [activeStep, setActiveStep] = React.useState(1);
+
+  function handleNext() {
+    setActiveStep(prevActiveStep => prevActiveStep + 1);
+    doNextPage(currentPage + 1);
+  }
+
+  function handleBack() {
+    setActiveStep(prevActiveStep => prevActiveStep - 1);
+    doPreviousPage(currentPage - 1);
+  }
+  
   return (
     <div className="">
       <NavBar />
@@ -38,6 +46,17 @@ function App({movies, doFetchMovies}) {
         setQuery={setQuery}
         query={query}
       />
+      {totalPages > 1 ?
+        <Stepper
+          query={query}
+          currentPage={currentPage}
+          totalPages={totalPages}
+          totalResults={totalResults}
+          nextPage={() => handleNext()}
+          previousPage={() => handleBack()}
+        />
+        : null
+      }
       <Button
         doFetchMovies={() => doFetchMovies(query)}
         query={query}// is this needed?

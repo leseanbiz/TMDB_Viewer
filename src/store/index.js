@@ -19,7 +19,7 @@ const store = createStore(
  applyMiddleware(...middlewares)
 );
 
-// console.log("store", store.getState());
+console.log("store", store.getState());
 
 saga.run(rootSaga);
 

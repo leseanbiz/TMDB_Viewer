@@ -22,7 +22,7 @@ const theme = createMuiTheme({
 
 export default function SearchField({query, setQuery}) {
   const classes = useStyles();
-  console.log(query);
+
   return (
     <div className={classes.root}>
       <ThemeProvider theme={theme}>

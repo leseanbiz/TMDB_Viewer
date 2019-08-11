@@ -18,12 +18,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function CustomButton({doFetchMovies, search}) {
+export default function CustomButton({doFetchMovies, query}) {
   const classes = useStyles();
-  console.log("search in button", search)
+  // console.log("search in button", search)
   return (
     <div>
-      <Button variant="contained" color="secondary" onClick={search => doFetchMovies(search)}className={classes.button}>
+      <Button variant="contained" color="secondary" onClick={query => doFetchMovies(query)}className={classes.button}>
         Search
         <DeleteIcon className={classes.rightIcon} />
       </Button>

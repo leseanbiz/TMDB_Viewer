@@ -22,7 +22,7 @@ const MovieCardDetails = ({overview, id, doFetchDetails, details}) => {
   if(id !== details.id){
    doFetchDetails(id);
   }
- }, [])
+ })
 
  return(
          <CardContent>

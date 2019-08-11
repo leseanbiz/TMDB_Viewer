@@ -1,85 +1,26 @@
 import React, { useState } from 'react';
+import Search from '../containers/Search';
 import NavBar from './NavBar';
-import SearchField from './SearchField';
-import MovieCard from './MovieCard';
-import Button from './Button';
-import { connect } from 'react-redux';
-import { fetchMovies } from '../actions/movies';
-import { nextPage, previousPage } from '../actions/pagination';
-import Stepper from './Stepper';
+import Pagination from '../containers/Pagination';
+import MovieCards from '../containers/MovieCards';
 
+function App() {
 
-const mapStateToProps = state => {
-  return {
-    movies: state.moviesReducer.results,
-    currentPage: state.moviesReducer.page,
-    totalPages: state.moviesReducer.total_pages,
-    totalResults: state.moviesReducer.total_results,
-    }
-  };
-
-const mapDispatchToProps = dispatch => {
-  return {
-    doFetchMovies: query => dispatch(fetchMovies(query)),
-    doNextPage: (num, query) => dispatch(nextPage(num, query)),
-    doPreviousPage: (num, query) => dispatch(previousPage(num, query)),
-  }
-}
-
-function App({movies, doFetchMovies, currentPage, totalPages, totalResults, doNextPage, doPreviousPage}) {
-  
   const [query, setQuery] = useState('')
-
-  function handleNext() {
-    doNextPage(currentPage + 1, query);
-  }
-
-  function handleBack() {
-    doPreviousPage(currentPage - 1, query);
-  }
   
   return (
     <div className="">
       <NavBar />
-      <SearchField
+      <Search 
+        query={query}
         setQuery={setQuery}
+      />
+      <Pagination 
         query={query}
       />
-      <Button
-        doFetchMovies={() => doFetchMovies(query)}
-        query={query}// is this needed?
-      />
-      {totalPages > 1 ?
-        <Stepper
-          query={query}
-          currentPage={currentPage}
-          totalPages={totalPages}
-          totalResults={totalResults}
-          nextPage={() => handleNext()}
-          previousPage={() => handleBack()}
-        />
-        : null
-      }
-
-      {
-        movies ? movies.map(movie => {
-            return (
-                <MovieCard
-                  key={movie.id}
-                  id={movie.id}
-                  img={movie.backdrop_path}
-                  title={movie.title}
-                  votes={movie.vote_count}
-                  popularity={movie.votes_average}
-                  releaseDate={movie.release_date}
-                  overview={movie.overview}
-                />
-            )
-          }
-        ) : <h1>Please enter a search value</h1>
-      }
+      <MovieCards />
     </div>
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

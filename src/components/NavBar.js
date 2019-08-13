@@ -1,8 +1,9 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, createMuiTheme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import { ThemeProvider } from '@material-ui/styles';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -16,18 +17,26 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const theme = createMuiTheme({
+  palette: {
+    primary: { 500: "#90CCF4"},
+  },
+});
+
 export default function NavBar() {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
+      <ThemeProvider theme={theme}>
       <AppBar position="static">
         <Toolbar>
           <Typography align="center" variant="h6" className={classes.title}>
-            The Movie DB
+            TMDB_Viewer
           </Typography>
         </Toolbar>
       </AppBar>
+      </ThemeProvider>
     </div>
   );
 }

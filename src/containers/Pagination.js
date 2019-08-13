@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Grid } from '@material-ui/core';
 import { nextPage, previousPage } from '../actions/pagination';
 import Stepper from '../components/Stepper';
+
 
 
 const mapStateToProps = state => {
@@ -32,19 +34,21 @@ function Pagination({ query, currentPage, totalPages, totalResults, doNextPage, 
   }
 
   return (
-    <div className="">
-      {totalPages > 1 ?
-        <Stepper
-          // query={query}
-          currentPage={currentPage}
-          totalPages={totalPages}
-          totalResults={totalResults}
-          nextPage={() => handleNext()}
-          previousPage={() => handleBack()}
-        />
-        : null
-      }
-    </div>
+      
+    <Grid container justify="center">
+      <Grid item xs={10}>
+        {totalPages > 1 ?
+          <Stepper
+            currentPage={currentPage}
+            totalPages={totalPages}
+            totalResults={totalResults}
+            nextPage={() => handleNext()}
+            previousPage={() => handleBack()}
+          />
+          : null
+        }
+        </Grid>
+        </Grid>
   );
 }
 

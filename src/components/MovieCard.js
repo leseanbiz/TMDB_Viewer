@@ -13,12 +13,12 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import MovieCardDetails from './MovieCardDetails';
+import MovieCardDialog from './MovieCardDialog';
 
 
 const useStyles = makeStyles(theme => ({
   card: {
-    maxWidth: 345,
+    maxWidth: "345px",
   },
   media: {
     height: 0,
@@ -84,9 +84,12 @@ export default function MovieCard({id, img, title, votes, popularity, releaseDat
         </IconButton>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <MovieCardDetails
+        <MovieCardDialog
+          title={title}
           overview={overview}
           id={id}
+          open={expanded}
+          setOpen={setExpanded}
         />
       </Collapse>
     </Card>

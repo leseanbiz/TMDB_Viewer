@@ -1,4 +1,5 @@
 import React from 'react';
+import { Grid } from '@material-ui/core';
 import SearchField from '../components/SearchField';
 import Button from '../components/Button';
 import { connect } from 'react-redux';
@@ -24,17 +25,17 @@ function Search({ query, setQuery, doFetchMovies }) {
   }
 
   return (
-    <div className="">
-      <SearchField
-        setQuery={setQuery}
-        query={query}
-        handleSearchFetchMovies={handleSearchFetchMovies}
-      />
-      <Button
-        handleButtonFetchMovies={() => handleButtonFetchMovies(query)}
-        query={query}
-      />
-    </div>
+        <Grid container item xs={12} justify="center">
+          <SearchField
+            setQuery={setQuery}
+            query={query}
+            handleSearchFetchMovies={handleSearchFetchMovies}
+          />
+            {/* <Button
+              handleButtonFetchMovies={() => handleButtonFetchMovies(query)}
+              query={query}
+            /> */}
+      </Grid>
   );
 }
 

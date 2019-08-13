@@ -6,17 +6,17 @@ import { green } from '@material-ui/core/colors';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    display: 'flex',
-    flexWrap: 'wrap',
+    // display: 'flex',
+    // flexWrap: 'wrap',
   },
   margin: {
-    margin: theme.spacing(1),
+    margin: theme.spacing(2),
   },
 }));
 
 const theme = createMuiTheme({
   palette: {
-    primary: green,
+    primary: {500: '#F3D250'},
   },
 });
 

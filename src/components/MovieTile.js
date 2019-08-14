@@ -1,13 +1,12 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
-import ListSubheader from '@material-ui/core/ListSubheader';
 import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
 import MovieCardDialog from './MovieCardDialog';
 import Collapse from '@material-ui/core/Collapse';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -34,13 +33,13 @@ export default function TitlebarGridList({ id, img, title, votes, popularity, re
 
   return (
    <GridListTile key={id} className={classes.tileBar} spacing={3}>
-     <img src={img ? `https://image.tmdb.org/t/p/w500${img}` : null} alt={title} />
+     <img src={img ? `https://image.tmdb.org/t/p/w500${img}` : "https://ipsumimage.appspot.com/640x360?l=No+image+provided"} alt={title} />
      <GridListTileBar
-       
        title={title}
-       subtitle={<span>by: {releaseDate}</span>}
+       subtitle={<span>release date: {releaseDate}</span>}
        votes={votes}
        actionIcon={
+        <Tooltip title="view details" aria-label="view details">
          <IconButton 
           aria-label={`info about ${title}`} 
           className={classes.icon}
@@ -49,6 +48,7 @@ export default function TitlebarGridList({ id, img, title, votes, popularity, re
          >
            <InfoIcon />
          </IconButton>
+         </Tooltip>
        }
          />
        <Collapse in={expanded} timeout="auto" unmountOnExit>

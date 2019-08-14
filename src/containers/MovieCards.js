@@ -34,7 +34,7 @@ function MovieCards({ movies }) {
       {
         movies ? movies.map(movie => {
             return (
-              <GridList cellHeight="auto" className={classes.gridList} spacing={3}>
+              <GridList cellHeight="auto" key={movie.id} className={classes.gridList} spacing={3}>
                 <MovieTile
                   id={movie.id}
                   img={movie.backdrop_path}

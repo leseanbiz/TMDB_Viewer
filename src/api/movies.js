@@ -5,6 +5,7 @@ import { PAGE_NUM, MOVIE_DB_BASE_URL, MOVIE_DB_QUERY_PARAMS, API_KEY } from '../
 export function* fetchMoviesSagaWorker(action) {
  if(!action.query) { return alert("please enter a search value") }
  const json = yield fetch(`${MOVIE_DB_BASE_URL + PAGE_NUM + MOVIE_DB_QUERY_PARAMS + API_KEY}&query=${action.query}`)
-                          .then(response => response.json())
+                          .then(response => response.status > 400 ? alert("Server error") : response.json())
+                          
  yield put({ type: ADD_MOVIES, payload: json});
 }

@@ -1,21 +1,21 @@
-#LeSean Johnson TMDB_Viewer for NAVIS.
+# LeSean Johnson TMDB_Viewer for NAVIS.
 
 This is my app built around the TMDB free API to search movies. This app uses the ReactJS framework for structure, Redux for state management, and Redux Sagas for Asynchronous actions.
 
-##Running the application:
+## Running the application:
 1. Navigate  to the desired location on your machine and cone the repo using: ```git clone https://github.com/leseanbiz/TMDB_Viewer.git```
 2. Then run ```yarn``` with in the new directory.
 3. Running ```yarn start``` should start the application in the default browser at ```localhost.com/3000```
 
-##Notes on development
+## Notes on development
 During the development of this app the API from TMDB has had some issues. Nevertheless when it restabilizes all should function as expected.
 
 Notes on down time with reasons can be found here: [Link](https://twitter.com/themoviedb)
 
-##Functionality
+## Functionality
 On load the app should focus on the search bar and searches are triggered with the enter key. If the results come back with more than one page then a pagination component will render at the top and bottom of the results.
 
-#Enjoy!
+# Enjoy!
 
 
 <!-- This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

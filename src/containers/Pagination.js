@@ -37,18 +37,19 @@ function Pagination({ query, currentPage, totalPages, totalResults, doNextPage, 
       
     <Grid container justify="center">
       <Grid item xs={10}>
-        {totalPages > 1 ?
-          <Stepper
-            currentPage={currentPage}
-            totalPages={totalPages}
-            totalResults={totalResults}
-            nextPage={() => handleNext()}
-            previousPage={() => handleBack()}
-          />
+        {
+          totalPages > 1 ?
+            <Stepper
+              currentPage={currentPage}
+              totalPages={totalPages}
+              totalResults={totalResults}
+              nextPage={() => handleNext()}
+              previousPage={() => handleBack()}
+            />
           : null
         }
-        </Grid>
-        </Grid>
+      </Grid>
+    </Grid>
   );
 }
 

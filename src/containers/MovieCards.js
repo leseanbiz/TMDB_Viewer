@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Grid, GridList, makeStyles } from'@material-ui/core';
-import MovieCard from '../components/MovieCard';
 import MovieTile from '../components/MovieTile';
 
 const useStyles = makeStyles(theme => ({
@@ -28,21 +27,24 @@ const mapStateToProps = state => {
   };
 
 function MovieCards({ movies }) {
+  
   const classes = useStyles();
+
   return (
-    <Grid container justify="space-evenly" alignContent="space-evenly" >
+    <Grid container justify="space-evenly">
       {
         movies ? movies.map(movie => {
+          const { id, backdrop_path, title, vote_count, votes_average, release_date, overview } = movie;
             return (
               <GridList cellHeight="auto" key={movie.id} className={classes.gridList} spacing={3}>
                 <MovieTile
-                  id={movie.id}
-                  img={movie.backdrop_path}
-                  title={movie.title}
-                  votes={movie.vote_count}
-                  popularity={movie.votes_average}
-                  releaseDate={movie.release_date}
-                  overview={movie.overview}
+                  id={id}
+                  img={backdrop_path}
+                  title={title}
+                  votes={vote_count}
+                  popularity={votes_average}
+                  releaseDate={release_date}
+                  overview={overview}
                 />
               </GridList>
             )

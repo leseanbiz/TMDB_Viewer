@@ -14,13 +14,12 @@ function App() {
           <NavBar />
         <Grid container>
           <Search 
-            query={query}
-            setQuery={setQuery}
+            {...{query, setQuery}}
           />
         </Grid>
         <Grid container spacing={2}>
           <Pagination 
-            query={query}
+            {...{query}}
           />
         </Grid>
         <Grid container>
@@ -28,7 +27,7 @@ function App() {
         </Grid>
       <Grid container spacing={2}>
         <Pagination 
-          query={query}
+          {...{query}}
         />
       </Grid>
     </Grid>

@@ -1,4 +1,17 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+LeSean Johnson TMDB_Viewer for NAVIS.
+
+This is my app built around the TMDB free API to search movies. This app uses the ReactJS framework for structure, Redux for state management, and Redux Sagas for Asynchronous actions.
+
+During the development of this app the API from TMDB has had some issues. Nevertheless when it restabilizes all should function as expected.
+
+Notes on down time with reasons can be found here: https://twitter.com/themoviedb
+
+On load the app should focus on the search bar and searches are triggered with the enter key. If the results come back with more than one page then a pagination component will render at the top and bottom of the results.
+
+Enjoy!
+
+
+<!-- This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
@@ -65,4 +78,4 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 
 ### `npm run build` fails to minify
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify -->

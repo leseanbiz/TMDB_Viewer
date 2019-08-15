@@ -30,12 +30,15 @@ export default function TitlebarGridList({ id, img, title, votes, popularity, re
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const handleExpandClick = () => setExpanded(!expanded)
+  const tmdbImgUrl =  `https://image.tmdb.org/t/p/w500${img}`
+  const fallbackImg = "https://ipsumimage.appspot.com/640x360?l=No+image+provided"
+  const fallbackTitle = "no title provided";
 
   return (
    <GridListTile key={id} className={classes.tileBar} spacing={3}>
-     <img src={img ? `https://image.tmdb.org/t/p/w500${img}` : "https://ipsumimage.appspot.com/640x360?l=No+image+provided"} alt={title} />
+     <img src={ img ? tmdbImgUrl : fallbackImg } alt={title} />
      <GridListTileBar
-       title={title}
+       title={title ? title : fallbackTitle}
        subtitle={<span>release date: {releaseDate}</span>}
        votes={votes}
        actionIcon={
